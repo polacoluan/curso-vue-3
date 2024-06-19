@@ -1,5 +1,5 @@
 <template>
-  <HelloWorld />
+  <ListTasks />
 </template>
 
 <script setup>

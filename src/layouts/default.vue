@@ -2,11 +2,8 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer">
       <v-list>
-        <v-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.png" subtitle="john@google.com"
-          title="John Leider">
-          <template v-slot:append>
-            <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
-          </template>
+        <v-list-item prepend-avatar="https://cdn.vuetifyjs.com/images/john.png" subtitle="To do List"
+          title="Luan de Carvalho">
         </v-list-item>
       </v-list>
 
@@ -19,7 +16,7 @@
             <v-icon :icon="item.icon"></v-icon>
           </template>
 
-          <v-list-item-title v-text="item.text"></v-list-item-title>
+          <v-list-item-title :textContent="item.text"></v-list-item-title>
         </v-list-item>
         </router-link>
       </v-list>
@@ -28,7 +25,7 @@
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-title>Application</v-app-bar-title>
+      <v-app-bar-title>To do List</v-app-bar-title>
     </v-app-bar>
 
     <v-main>
@@ -48,3 +45,10 @@ const items = [
 ];
 
 </script>
+
+<style scoped>
+  a{
+    text-decoration: none;
+    color: #505050;
+  }
+</style>
