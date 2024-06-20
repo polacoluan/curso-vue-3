@@ -1,7 +1,7 @@
 <template>
     <div class="text-center pa-4">
       <v-dialog
-        v-model="props.dialog"
+        v-model="taskStore.showDialogTaskFields"
         max-width="600"
         persistent
       >
@@ -16,7 +16,7 @@
           <template v-slot:actions>
             <v-spacer></v-spacer>
   
-            <v-btn @click="$emit('toggle')">
+            <v-btn @click="taskStore.toggleEdit()">
               Ok
             </v-btn>
           </template>
@@ -26,8 +26,10 @@
   </template>
 
 <script setup>
+  import { useTaskStore } from '@/stores/task';
+
+  const taskStore = useTaskStore();
     const props = defineProps({
-        dialog: Boolean,
         task: Object
     })
 </script>

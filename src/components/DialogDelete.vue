@@ -1,7 +1,7 @@
 <template>
     <div class="text-center pa-4">
       <v-dialog
-        v-model="props.dialog"
+        v-model="taskStore.showDialogDelete"
         max-width="450"
         persistent
       >
@@ -12,10 +12,10 @@
           <template v-slot:actions>
             <v-spacer></v-spacer>
             
-            <v-btn @click="$emit('toggleDelete')">
+            <v-btn @click="taskStore.toggleDelete()">
               Não
             </v-btn>
-            <v-btn @click="$emit('deleteTask')">
+            <v-btn @click="taskStore.deleteTask()">
               Sim
             </v-btn>
   
@@ -26,7 +26,7 @@
   </template>
 
 <script setup>
-    const props = defineProps({
-        dialog: Boolean
-    });
+  import { useTaskStore } from '@/stores/task';
+
+  const taskStore = useTaskStore();
 </script>
