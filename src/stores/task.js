@@ -1,47 +1,57 @@
 // Utilities
 import { defineStore } from 'pinia'
+import { useAlertStore } from './alert';
+
+const alertStore = useAlertStore();
 
 export const useTaskStore = defineStore('task', {
     state: () => ({
-        tasks: [
-            {
-                title: "Estudar Vue",
-                description: "Estudar Vue com Vuetify"
-            },
-            {
-                title: "Ler Documentação",
-                description: "Ler a documetação do Vuetify"
-            }
-        ],
+        tasks: [],
         titleTaskCreating: "",
         indexTaskSelected: 0,
         showDialogTaskFields: false,
         showDialogDelete: false
     }),
-    actions:{
-        addTask(){
+    actions: {
+        addTask() {
+            if(!this.titleTaskCreating) return;   
             this.tasks.push({
                 title: this.titleTaskCreating
             })
             this.titleTaskCreating = "";
+            this.saveLocalData();
+            alertStore.notifyAlert();
         },
-        toggleDelete(index){
+        toggleDelete(index) {
             this.showDialogDelete = !this.showDialogDelete;
             if (index != null) {
-          
-              this.indexTaskSelected = index;
+
+                this.indexTaskSelected = index;
             }
         },
-        deleteTask(){
+        deleteTask() {
             this.tasks.splice(this.indexTaskSelected, 1);
             this.toggleDelete();
+            this.saveLocalData();
         },
-        toggleEdit(index){
+        toggleEdit(index) {
             this.showDialogTaskFields = !this.showDialogTaskFields;
             if (index != null) {
-          
-              this.indexTaskSelected = index;
+
+                this.indexTaskSelected = index;
             }
-          }
+            this.saveLocalData();
+        },
+        saveLocalData(){
+            localStorage.setItem('tasks',
+                JSON.stringify(this.tasks)
+            )
+        },
+        getTasks(){
+            let items = localStorage.getItem('tasks');
+            if(items){
+                this.tasks = JSON.parse(items);
+            }
+        }
     }
 })
