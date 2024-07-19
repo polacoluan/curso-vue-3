@@ -10,10 +10,12 @@ import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 // Utilities
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    VitePWA({ registerType: 'autoUpdate' }),
     VueRouter(),
     Layouts(),
     Vue({
