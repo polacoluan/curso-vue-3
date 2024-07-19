@@ -1,13 +1,18 @@
 <template>
   <div class="alert-notification">
     <v-alert
-      text="Tarefa criada com sucesso"
-      type="success"
+      class="animate__animated animate__bounce"
+      :text="alertStore.text"
+      :type="alertStore.type"
       closable
     ></v-alert>
   </div>
 </template>
-
+<script setup>
+import 'animate.css';
+import { useAlertStore } from "@/stores/alert";
+const alertStore = useAlertStore();
+</script>
 <style scoped>
    .alert-notification{
         position: fixed;
